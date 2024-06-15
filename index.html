@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/notifications.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/phosphor-icons@1.4.0/src/css/icons.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Controle de Estoque</h1>
+        <div id="notification-container">
+            <div id="notification-icon">
+                <i class="ph ph-bell"></i>
+                <span class="badge" id="notification-count">0</span>
+            </div>
+            <div id="notification-dropdown">
+                <h4>Notificações</h4>
+                <div id="notification-items">
+                    <!-- Itens de notificação serão adicionados aqui dinamicamente -->
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section id="product-management">
+            <h2>Gerenciamento de Produtos</h2>
+            <form id="product-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Nome do Produto:</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Categoria:</label>
+                        <select id="category" required>
+                            <option value="Alimentos">Alimentos</option>
+                            <option value="Bebidas">Bebidas</option>
+                            <option value="Beleza">Produtos de Beleza</option>
+                            <option value="Higiene">Produtos de Higiene</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expiry">Data de Validade:</label>
+                        <input type="date" id="expiry" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantidade:</label>
+                        <input type="number" id="quantity" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="batch">Lote:</label>
+                        <input type="text" id="batch" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="supplier">Fornecedor:</label>
+                        <input type="text" id="supplier" required>
+                    </div>
+                </div>
+                <button type="submit">Adicionar Produto</button>
+            </form>
+        </section>
+        <section id="product-list">
+            <h2>Lista de Produtos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Validade</th>
+                        <th>Quantidade</th>
+                        <th>Lote</th>
+                        <th>Fornecedor</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="product-table-body">
+                    <!-- Produtos serão adicionados aqui dinamicamente -->
+                </tbody>
+            </table>
+        </section>
+        <section id="dashboard">
+            <h2>Dashboard</h2>
+            <div id="notification-area"></div>
+            <div id="reports">
+                <h3>Relatórios</h3>
+                <label for="days-filter">Filtrar por dias até vencimento:</label>
+                <select id="days-filter">
+                    <option value="15">15 dias</option>
+                    <option value="30">30 dias</option>
+                    <option value="45">45 dias</option>
+                </select>
+                <button id="generate-report">Gerar Relatório</button>
+                <button id="generate-xlsx">Gerar Relatório XLSX</button>
+            </div>
+            <div id="report-container">
+                <div id="report-output"></div>
+            </div>
+        </section>
+    </main>
+    <!-- Modal para aviso -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <p>Não é possível adicionar itens com data de validade já passada.</p>
+        </div>
+    </div>
+    <!-- Modal de Confirmação -->
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content">
+            <p id="confirm-message"></p>
+            <button id="confirm-yes">Sim</button>
+            <button id="confirm-no">Não</button>
+        </div>
+    </div>
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/report.js"></script>
+    <script type="module" src="js/notification.js"></script>
+</body>
+</html>
